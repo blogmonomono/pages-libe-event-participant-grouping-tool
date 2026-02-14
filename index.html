@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Splitter | 参加者グループ分けツール</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>参加者グループ分けツール</h1>
+            <p>メンバーができるだけ重複しないようにグループ分けします。</p>
+        </header>
+
+        <main>
+            <div class="input-row">
+                <section class="upload-section" id="drop-zone">
+                    <div class="drop-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-upload-cloud">
+                            <polyline points="16 16 12 12 8 16"></polyline>
+                            <line x1="12" y1="12" x2="12" y2="21"></line>
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                            <polyline points="16 16 12 12 8 16"></polyline>
+                        </svg>
+                        <p>CSVをドラッグ＆ドロップ、または選択</p>
+                        <p class="sub-text">※リベのオフ会チャットの「一覧表をダウンロード」から<br>csvをダウンロードできます</p>
+                    </div>
+                    <input type="file" id="file-input" accept=".csv" hidden>
+                </section>
+
+                <div class="or-divider">OR</div>
+
+                <section class="manual-input-section">
+                    <textarea id="manual-text" placeholder="名前を改行区切りで入力...&#10;例：&#10;田中太郎&#10;鈴木花子"></textarea>
+                    <button id="add-manual-btn" class="secondary-btn">メンバーを確定</button>
+                    <button id="add-test-data-btn" class="text-link-btn">テストデータで試す</button>
+                </section>
+            </div>
+
+            <section class="preview-section hidden" id="preview-section">
+                <h2><span class="count-badge" id="member-count">0</span> 名の参加者を検出</h2>
+                <p class="instruction-text">※名前をクリックすると編集できます</p>
+                <div class="member-list" id="member-list">
+                    <!-- メンバーリストがここに表示されます -->
+                </div>
+            </section>
+
+            <section class="settings-section hidden" id="settings-section">
+                <div class="setting-group">
+                    <label for="group-count">グループ数</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="group-count" value="4" min="2">
+                        <span class="unit">グループ</span>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label for="round-count">ミーティング回数</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="round-count" value="3" min="1">
+                        <span class="unit">回</span>
+                    </div>
+                </div>
+                <button id="execute-btn" class="primary-btn">グループ分けを実行</button>
+            </section>
+
+            <section class="result-section hidden" id="result-section">
+                <div class="result-header">
+                    <h2>グループ分け結果</h2>
+                    <div class="actions">
+                        <button id="copy-text-btn" class="secondary-btn">テキストをコピー</button>
+                        <button id="download-img-btn" class="secondary-btn">画像を保存</button>
+                    </div>
+                </div>
+                <div id="result-container" class="result-container">
+                    <!-- 結果がここに生成されます -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
